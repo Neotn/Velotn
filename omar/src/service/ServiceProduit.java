@@ -281,7 +281,7 @@ public class ServiceProduit implements IServiceProduit {
 			// TODO Auto-generated catch block
 			Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE,null,e);
 		}finally {
-			String PR="UPDATE velos set marque=?, type=? where id=?";
+			String PR="UPDATE piecesrechanges set marque=?, type=? where id=?";
 			try {
 				pst=cnx.prepareStatement(PR);
 				pst.setString(1, p.getMarque());
@@ -313,7 +313,7 @@ public class ServiceProduit implements IServiceProduit {
 			// TODO Auto-generated catch block
 			Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE,null,e);
 		}finally {
-			String acc="UPDATE velos set marque=?, type=? where id=?";
+			String acc="UPDATE accessoire set marque=?, type=? where id=?";
 			try {
 				pst=cnx.prepareStatement(acc);
 				pst.setString(1, a.getMarque());
@@ -334,10 +334,10 @@ public class ServiceProduit implements IServiceProduit {
 
 	@Override
 	public boolean RechercheProduit(Produit p) {
-		
 		if(p instanceof Velo)
 		{
 			System.out.println("V");
+			
 			return displayVelos().contains(p);
 		}
 		
@@ -352,7 +352,6 @@ public class ServiceProduit implements IServiceProduit {
 			System.out.println("A");
 			return displayAccesoires().contains(p);
 		}
-		
 		return false;
 		
 	}

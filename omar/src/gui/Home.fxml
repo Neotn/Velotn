@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #292728;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="gestionStock" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#onGestionStockClicked" onMouseEntered="#onMouseEnter" onMouseExited="#onMouseExit" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-background-radius: 0; -fx-border-color: transparent; -fx-font-size: 16; -fx-text-fill: #828282;" text="Gestion Stock" />
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane fx:id="rootPane" prefHeight="200.0" prefWidth="200.0" />
+   </center>
+</BorderPane>

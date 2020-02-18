@@ -7,6 +7,41 @@ public class Velo extends Produit {
 	private String type;
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((marque == null) ? 0 : marque.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Velo other = (Velo) obj;
+		if (marque == null) {
+			if (other.marque != null)
+				return false;
+		} else if (!marque.equals(other.marque))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
+	}
+
+
+
+	@Override
 	public String toString() {
 		return "Velo [marque=" + marque + ", type=" + type + ", " + super.toString() + "]";
 	}
@@ -18,8 +53,8 @@ public class Velo extends Produit {
 		this.setMarque(marque);
 		this.setType(type);
 	}
-	public Velo(String nomProduit, String description, float prix, String marque, String type) {
-		super(nomProduit, description, prix);
+	public Velo(String nomProduit, String description, float prix, int quantite, String marque, String type) {
+		super(nomProduit, description, prix,quantite);
 		this.setMarque(marque);
 		this.setType(type);
 	}
