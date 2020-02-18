@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.velotn.Ui.MainUiController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0" styleClass="sidepannel" stylesheets="@../css/stylesheet.css" HBox.hgrow="NEVER">
+         <children>
+            <JFXButton fx:id="connect" focusTraversable="false" maxWidth="1.7976931348623157E308" ripplerFill="WHITE" styleClass="buttonConnect" text="Connecter " textFill="WHITE">
+               <font>
+                  <Font name="Open Sans" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="don" focusTraversable="false" layoutX="10.0" layoutY="288.0" maxWidth="1.7976931348623157E308" onAction="#open_don" ripplerFill="WHITE" text="Faire un don" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </JFXButton>
+            <JFXButton fx:id="commande" focusTraversable="false" layoutX="10.0" layoutY="315.0" maxWidth="1.7976931348623157E308" onAction="#show_commande" ripplerFill="WHITE" text="Afficher Commande" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </JFXButton>
+         </children></VBox>
+      <VBox fx:id="contentArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="contentPane" stylesheets="@../css/stylesheet.css" HBox.hgrow="ALWAYS">
+         <children>
+            <Pane prefHeight="60.0" prefWidth="774.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="720.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#close_app" prefHeight="35.0" prefWidth="35.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Label>
+                  <Label alignment="CENTER" layoutX="680.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#minimize_app" prefHeight="35.0" prefWidth="35.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/minimize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Label>
+               </children>
+            </Pane>
+            <Pane fx:id="displayArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
