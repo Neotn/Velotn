@@ -37,11 +37,11 @@ public class Testcrud {
          Promotion pr2 = new Promotion(2,"promo", 20, p2);   
         
         PromotionService ps = new PromotionService() ;  
-        //ps.insertPromotion(pr1);  
+       //ps.insertPromotion(pr1);  
              // ps.Updateprix(1,1);
         //ps.insertPromotion(pr2);  
                //ps.Updateprix(2,2);
-       // ps.Update(1,"Noel",30) 
+     //  ps.Update(1,"Noel",30) ;
         //ps.Delete(1);  
        //ps.displaAll().forEach(System.out::println); 
       //ps.rechercherParType("promo").forEach(System.out::println);
@@ -54,18 +54,18 @@ Velo v1 = new Velo(1, "vtt", "sdhshd", 20, "mercedes", "tir");
         Location  l1 = new Location(u1,"2020-03-04","2020-03-07",0,v1); 
         Location l2 = new Location(u1,"2020-07-10","2020-07-15",0,v2);  
         
-        //ls.insertLocation(l1);   
+       //ls.insertLocation(l1);   
         //ls.UpdatePrix(12,ls.calculer(1),1);
        //ls.Update(12,"2020-03-10","2020-03-20",1);  
          //ls.UpdatePrix(12,ls.calculer(1),1); 
-      // ls.insertLocation(l2); 
+    // ls.insertLocation(l2); 
        // ls.UpdatePrix(12,ls.calculer(2),2);  
          //ls.displaAll().forEach(System.out::println);
 //        ls.TrierParPrix().forEach(System.out::println);
 //           ls.rechercherParid(12).forEach(System.out::println); 
-          // ls.DeleteProduitLocation(2); 
+         // ls.DeleteProduitLocation(2); 
            //ls.DeleteUserLocation(12);
-             
+   
     }
     
 }

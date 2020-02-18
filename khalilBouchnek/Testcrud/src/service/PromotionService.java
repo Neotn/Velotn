@@ -32,14 +32,16 @@ public class PromotionService implements Ipromotion<Promotion>{
         cnx=DataSource.getInstance().getcnx();
     }
     @Override
-    public void insertPromotion(Promotion p) {   
-       String req=" insert into promotion(id,type,taux,id_produits) values(?,?,?,?)";  
+    public int insertPromotion(Promotion p) {   
+       String req=" insert into promotion(type,taux,id_produits) values(?,?,?)";  
+            String r2 = "select LAST_INSERT_ID() as id from promotion " ;   
+            int id = 0 ; 
         try {
         pst = cnx.prepareStatement(req) ; 
-        pst.setInt(1,p.getId());
-        pst.setString(2, p.getType()); 
-        pst.setFloat(3, p.getTaux());  
-        pst.setInt(4,p.getPro().getId());
+       // pst.setInt(1,p.getId());
+        pst.setString(1, p.getType()); 
+        pst.setFloat(2, p.getTaux());  
+        pst.setInt(3,p.getPro().getId());
         pst.executeUpdate() ; 
           System.out.println("bien Ajouter ");
 
@@ -47,6 +49,25 @@ public class PromotionService implements Ipromotion<Promotion>{
         { 
                         Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
 
+        } 
+        finally{
+            try {  
+               st=cnx.createStatement() ;  
+               rs=st.executeQuery(r2) ; 
+               
+               while (rs.next()) 
+               { 
+                   id=rs.getInt(1);
+               }
+            
+        }catch (SQLException ex) { 
+            Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
+
+        } 
+            finally {
+                return id ; 
+            }
+            
         }
         
         
@@ -127,7 +148,28 @@ public class PromotionService implements Ipromotion<Promotion>{
             Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
         } 
         return prix;
-    }
+    } 
+    
+    public List<Integer> get_id_product()  
+     { 
+          String req = "SELECT id from produits " ;  
+          List<Integer> listtd = new ArrayList<>() ; 
+        
+        try {
+            st=cnx.createStatement() ; 
+            rs=st.executeQuery(req);  
+           while(rs.next())
+           {
+                  listtd.add(rs.getInt(1)) ; 
+       
+           
+           }
+          
+        } catch (SQLException ex) {  
+            Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return listtd ; 
+     } 
      public float  calculerpromo(int id )  
      { 
           String req = "SELECT * FROM promotion WHERE id_produits="+id ;  
@@ -152,7 +194,7 @@ public class PromotionService implements Ipromotion<Promotion>{
      public List<Promotion> rechercherParType(String type) {  
         List<Promotion> list = new ArrayList<>() ;
         String req = "select * from promotion pr INNER JOIN produits p on pr.id_produits=p.id WHERE pr.type='"+type+"'";   
-        Produit pr;  ;
+        Produit pr;  
         try {  
                st=cnx.createStatement() ; 
                rs=st.executeQuery(req) ;  
@@ -181,7 +223,19 @@ public class PromotionService implements Ipromotion<Promotion>{
 
         }   
         return list ;
-    }
+    } 
+     public Produit rechercheP (int id) throws SQLException 
+     {   String req = "SELECT * from produits where id= "+id ; 
+           Produit p = null ; 
+               st=cnx.createStatement() ; 
+               rs=st.executeQuery(req) ;  
+                while(rs.next()) 
+                { 
+                      
+                  p=new Produit(rs.getInt("id"), rs.getString("nomProd"), rs.getString("description"), rs.getFloat("prix"));
+                }
+         return  p ; 
+     }
    
 }
 

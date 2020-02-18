@@ -13,12 +13,13 @@ import java.util.List;
  * @author khalil
  */
 public interface Ipromotion<T> {
-    void insertPromotion(T t) ;  
+    int insertPromotion(T t) ;  
         List<T> displaAll() ;  
         void Delete(int id) ; 
     void Update(int id , String type, float taux);  
      float  calculerpromo(int id ) ;  
        float getProduitPrix(int id) ; 
        void Updateprix(int id ,int id_pr) ; 
-       List<T> rechercherParType(String type) ;
+       List<T> rechercherParType(String type) ; 
+         List<Integer> get_id_product() ;  
 }

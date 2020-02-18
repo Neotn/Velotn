@@ -28,7 +28,16 @@ public class Location {
         this.date_fin = date_fin ;
         this.velo = v;
         
+    } 
+     public Location(User u , String date_debut , String date_fin , Velo v ) {
+        this.user= u ; 
+         
+        this.date_debut = date_debut;  
+        this.date_fin = date_fin ;
+        this.velo = v;
+        
     }  
+
 
   
     public Location(int id ,String date_debut , String date_fin , float prixtotal, Velo v ) {

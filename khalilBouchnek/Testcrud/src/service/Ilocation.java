@@ -20,7 +20,9 @@ public interface Ilocation<T> {
     float  calculer(int id ) ;  
       void DeleteProduitLocation(int id) ; 
       void UpdatePrix(int id  ,float prixtotal,int id_v) ; 
-      List<T> TrierParPrix(); 
+      List<T> TrierParPrix();  
+       List<Integer> get_id_velo()  ;
+       List<Integer> get_id_user()  ;
 
     
 }

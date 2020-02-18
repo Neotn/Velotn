@@ -5,12 +5,15 @@
  */
 package service;
 import entity.Location ; 
+import entity.User;
 import entity.Velo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,14 +35,15 @@ public class LocationService implements Ilocation<Location>{
  @Override
     public void insertLocation(Location l) { 
         
-        String req=" insert into location(id,date_debut,date_fin,prixtotal,id_produit) values(?,?,?,?,?)";  
+        String req=" insert into location(date_debut,date_fin,id_produit,id_user) values(?,?,?,?)";  
         try {
         pst = cnx.prepareStatement(req) ;
-        pst.setInt(1,l.getUser().getId());
-        pst.setString(2, l.getDate_debut()); 
-        pst.setString(3, l.getDate_fin()); 
-        pst.setFloat(4,l.getPrixtotal()); 
-        pst.setInt(5,l.getVelo().getId());
+        //pst.setInt(1,l.getUser().getId());
+        pst.setString(1, l.getDate_debut()); 
+        pst.setString(2, l.getDate_fin()); 
+        pst.setFloat(3,0); 
+        pst.setInt(4,l.getVelo().getId()); 
+        pst.setInt(5,l.getUser().getId());
         pst.executeUpdate() ; 
           System.out.println("bien Ajouter ");
 
@@ -49,8 +53,17 @@ public class LocationService implements Ilocation<Location>{
 
         }
         
-    }
-   
+    } 
+    
+//    public float prix(String d1 , String d2 ) 
+//    {   int days = 0 ;
+//        LocalDate Dd = LocalDate.parse(d1) ; 
+//        LocalDate Df = LocalDate.parse(d2) ;  
+//        days = (int)ChronoUnit.DAYS.between(Dd, Df) ; 
+//        return days ;
+//        
+//    }
+//   
 
     @Override
     public List<Location> displaAll() {  
@@ -225,8 +238,76 @@ public class LocationService implements Ilocation<Location>{
         } 
         return list ; 
         
-    } 
+    }  
     
+     public List<Integer> get_id_velo()  
+     { 
+          String req = "SELECT id from velos " ;  
+          List<Integer> listtd = new ArrayList<>() ; 
+        
+        try {
+            st=cnx.createStatement() ; 
+            rs=st.executeQuery(req);  
+           while(rs.next())
+           {
+                  listtd.add(rs.getInt(1)) ; 
+       
+           
+           }
+          
+        } catch (SQLException ex) {  
+            Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return listtd ; 
+     } 
+    
+     
+     public List<Integer> get_id_user()  
+     { 
+          String req = "SELECT id from fos_user " ;  
+          List<Integer> listtd = new ArrayList<>() ; 
+        
+        try {
+            st=cnx.createStatement() ; 
+            rs=st.executeQuery(req);  
+           while(rs.next())
+           {
+                  listtd.add(rs.getInt(1)) ; 
+       
+           
+           }
+          
+        } catch (SQLException ex) {  
+            Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return listtd ; 
+     }  
+     
+          public Velo recherchev (int id) throws SQLException 
+     {   String req = "SELECT * from velos where id= "+id ; 
+           Velo v = null ; 
+               st=cnx.createStatement() ; 
+               rs=st.executeQuery(req) ;  
+                while(rs.next()) 
+                { 
+                      
+                 v=new Velo(rs.getInt("id"), rs.getString("nomProd"), rs.getString("description"), rs.getFloat("prix"), rs.getString("marque"), rs.getString("type"));
+                }
+         return  v; 
+     } 
+          
+     public User rechercheu (int id) throws SQLException 
+        {   String req = "SELECT * from fos_user where id= "+id ; 
+              User u = null ; 
+                  st=cnx.createStatement() ; 
+                  rs=st.executeQuery(req) ;  
+                   while(rs.next()) 
+                   { 
+
+                    u=new User(rs.getInt(1));
+                   }
+            return  u ; 
+        }
 
    
     

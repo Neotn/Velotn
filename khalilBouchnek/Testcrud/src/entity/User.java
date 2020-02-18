@@ -35,7 +35,10 @@ public class User {
         this.interets = interets;
         this.image = image;
     }
-
+public User(int id )
+{ 
+    this.id= id ; 
+}
  
 
     public int getId() {
