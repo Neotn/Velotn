@@ -23,6 +23,10 @@ public class Produit {
         {
             
         }
+        public Produit(int id )
+        {
+            this.id=id;
+        }
 	public Produit(int id, String nomProduit, String description, float prix) {
 		super();
 		this.id = id;

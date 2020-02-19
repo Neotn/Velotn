@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -35,15 +36,23 @@
          </font>
       </Label>
       <ComboBox fx:id="comu" layoutX="132.0" layoutY="264.0" prefHeight="26.0" prefWidth="111.0" />
-      <TableView fx:id="tablocation" layoutX="378.0" layoutY="102.0" prefHeight="455.0" prefWidth="498.0">
+      <TableView fx:id="tablocation" layoutX="367.0" layoutY="110.0" prefHeight="455.0" prefWidth="603.0">
         <columns>
           <TableColumn fx:id="idlocation" prefWidth="76.00006103515625" text="id location" />
           <TableColumn fx:id="iduser" prefWidth="115.20001220703125" text="id utlisateur" />
-            <TableColumn fx:id="dd" prefWidth="96.0" text="Date Début" />
-            <TableColumn fx:id="df" prefWidth="111.9998779296875" text="Date fin" />
+            <TableColumn fx:id="dd" onEditCommit="#change_dd" prefWidth="96.0" text="Date Début" />
+            <TableColumn fx:id="df" onEditCommit="#change_df" prefWidth="111.9998779296875" text="Date fin" />
             <TableColumn fx:id="idvelo" prefWidth="96.79996337890623" text="id velo" />
+            <TableColumn fx:id="prixtotal" prefWidth="96.79996337890623" text="prixtotal" />
         </columns>
       </TableView>
       <Button layoutX="27.0" layoutY="505.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: green;" text="Ajouter" />
+      <Button fx:id="supprimer" layoutX="188.0" layoutY="505.0" mnemonicParsing="false" onAction="#buttonSupprimer" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: red;" text="Supprimer" />
+      <TextField fx:id="recherche" layoutX="478.0" layoutY="59.0" />
+      <Label layoutX="367.0" layoutY="58.0" prefHeight="27.0" prefWidth="104.0" text="Recherche : ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

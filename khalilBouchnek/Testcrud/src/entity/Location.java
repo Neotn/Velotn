@@ -48,6 +48,16 @@ public class Location {
           this.velo = v;
         
     }  
+    
+     public Location(User u , int id ,String date_debut , String date_fin , float prixtotal, Velo v ) {
+        this.id = id ; 
+        this.prixtotal = prixtotal; 
+        this.date_debut = date_debut;  
+        this.date_fin = date_fin ; 
+          this.velo = v; 
+          this.user=u ;
+        
+    }  
 
     public User getUser() {
         return user;
@@ -75,8 +85,10 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{ id=" + id + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", prixtotal=" + prixtotal + " " + velo + '}';
+        return "Location{" + "sdf=" + sdf + ", id=" + id + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", prixtotal=" + prixtotal + ", velo=" + velo + ", user=" + user + '}';
     }
+
+    
 
  
 
