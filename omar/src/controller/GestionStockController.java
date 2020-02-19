@@ -12,6 +12,8 @@ import entity.Velo;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -139,6 +141,9 @@ public class GestionStockController implements Initializable {
     
     @FXML
     private TextField TF_type;
+    
+    @FXML
+    private TextField recherche;
 
 
     
@@ -445,6 +450,45 @@ public class GestionStockController implements Initializable {
 	     listProducts();
 	 }
 	
+	@FXML
+	public void RechercheAV(){
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+FilteredList<Produit> filteredData = new FilteredList<>(data, b -> true);
+
+// 2. Set the filter Predicate whenever the filter changes.
+recherche.textProperty().addListener((observable, oldValue, newValue) -> {
+	filteredData.setPredicate(produit -> {
+		// If filter text is empty, display all persons.
+						
+		if (newValue == null || newValue.isEmpty()) {
+			return true;
+		}
+		
+		// Compare first name and last name of every person with filter text.
+		String lowerCaseFilter = newValue.toLowerCase();
+		
+		if (produit.getNomProduit().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+			return true; // Filter matches first name.
+		} else if (produit.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+			return true; // Filter matches last name.
+		}
+		else if (String.valueOf(produit.getId()).indexOf(lowerCaseFilter)!=-1)
+		     return true;
+		     else  
+		    	 return false; // Does not match.
+	});
+});
+
+// 3. Wrap the FilteredList in a SortedList. 
+SortedList<Produit> sortedData = new SortedList<>(filteredData);
+
+// 4. Bind the SortedList comparator to the TableView comparator.
+// 	  Otherwise, sorting the TableView would have no effect.
+sortedData.comparatorProperty().bind(listeProduits.comparatorProperty());
+
+// 5. Add sorted (and filtered) data to the table.
+listeProduits.setItems(sortedData);
+}
 	
 	
 	

@@ -110,5 +110,7 @@
 		<Button layoutX="453.0" layoutY="693.0" mnemonicParsing="false" onAction="#SupprimerVelo" text="Supprimer Velo" />
 		<Button layoutX="561.0" layoutY="693.0" mnemonicParsing="false" onAction="#SupprimerPiece" text="Supprimer Piece de Rechange" />
 		<Button layoutX="755.0" layoutY="693.0" mnemonicParsing="false" onAction="#SupprimerAccessoire" text="Supprimer Accessoire" />
+      <TextField fx:id="recherche" layoutX="1034.0" layoutY="610.0" onAction="#RechercheAV" />
+      <Label layoutX="917.0" layoutY="614.0" prefHeight="17.0" prefWidth="99.0" text="Recherche Produit" />
 	</children>
 </AnchorPane>
