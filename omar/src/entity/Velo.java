@@ -48,8 +48,8 @@ public class Velo extends Produit {
 	
 	
 	
-	public Velo(int id, String nomProduit, String description, float prix, String marque, String type) {
-		super(id, nomProduit, description, prix);
+	public Velo(int id, String nomProduit, String description, float prix,int quantite, String marque, String type) {
+		super(id, nomProduit, description, prix,quantite);
 		this.setMarque(marque);
 		this.setType(type);
 	}
@@ -58,6 +58,10 @@ public class Velo extends Produit {
 		this.setMarque(marque);
 		this.setType(type);
 	}
+	
+
+
+
 	public String getMarque() {
 		return marque;
 	}

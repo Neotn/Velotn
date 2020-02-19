@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.FloatStringConverter;
@@ -120,6 +121,24 @@ public class GestionStockController implements Initializable {
 
     @FXML
     private TableColumn<Accessoire, Integer> quantiteA;
+    
+    @FXML
+    private TextField TF_nomProd;
+
+    @FXML
+    private TextField TF_description;
+
+    @FXML
+    private TextField TF_prix;
+
+    @FXML
+    private TextField TF_quantite;
+
+    @FXML
+    private TextField TF_marque;
+    
+    @FXML
+    private TextField TF_type;
 
 
     
@@ -192,6 +211,7 @@ public class GestionStockController implements Initializable {
 		QuantiteV.setCellValueFactory(new PropertyValueFactory<>("quantite"));
 		
 		listeVelos.setItems(dataV);
+		listeVelos.setEditable(true);
 		
 		identifiantV.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 		nomV.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -223,6 +243,7 @@ public class GestionStockController implements Initializable {
 		quantiteP.setCellValueFactory(new PropertyValueFactory<>("quantite"));
 		
 		listePieces.setItems(dataP);
+		listePieces.setEditable(true);
 		
 		identifiantP.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 		nomP.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -251,6 +272,7 @@ public class GestionStockController implements Initializable {
 		quantiteA.setCellValueFactory(new PropertyValueFactory<>("quantite"));
 		
 		listeAccessoires.setItems(dataA);
+		listeAccessoires.setEditable(true);
 		
 		identifiantA.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 		nomA.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -258,12 +280,175 @@ public class GestionStockController implements Initializable {
 		prixA.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		marqueA.setCellFactory(TextFieldTableCell.forTableColumn());
 		typeA.setCellFactory(TextFieldTableCell.forTableColumn());
-		quantiteP.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		quantiteA.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 		
 	}
 	
 
+	@FXML
+	private void AjouterVelo()
+	{
+		sp.insertVelo(new Velo(TF_nomProd.getText(), TF_description.getText(), Float.parseFloat(TF_prix.getText()), Integer.parseInt(TF_quantite.getText()), TF_marque.getText(), TF_type.getText()));
+		listVelos();
+		listProducts();
+		
+	}
+	
+	@FXML
+	private void AjouterPiece()
+	{
+		sp.insetPieceR(new Piece_Rechange(TF_nomProd.getText(), TF_description.getText(), Float.parseFloat(TF_prix.getText()), Integer.parseInt(TF_quantite.getText()), TF_marque.getText(), TF_type.getText()));
+		listPieces();
+		listProducts();
+		
+	}
+	
+	@FXML
+	private void AjouterAccessoire()
+	{
+		sp.insertAccessoire(new Accessoire(TF_nomProd.getText(), TF_description.getText(), Float.parseFloat(TF_prix.getText()), Integer.parseInt(TF_quantite.getText()), TF_marque.getText(), TF_type.getText()));
+		listAccessoires();
+		listProducts();
+		
+	}
+	
+	@FXML
+	private void SupprimerVelo()
+	{
+		listeVelos.setItems(dataV);
 
+        ObservableList<Velo> allDemandes,SingleDemandes ;
+        allDemandes=listeVelos.getItems();
+        SingleDemandes=listeVelos.getSelectionModel().getSelectedItems();
+        Velo v = SingleDemandes.get(0);
+        sp.delete(v);
+        
+        SingleDemandes.forEach(allDemandes::remove);
+        listProducts();
+		
+	}
+	
+	@FXML
+	private void SupprimerPiece()
+	{
+		listePieces.setItems(dataP);
+
+        ObservableList<Piece_Rechange> allDemandes,SingleDemandes ;
+        allDemandes=listePieces.getItems();
+        SingleDemandes=listePieces.getSelectionModel().getSelectedItems();
+        Piece_Rechange p = SingleDemandes.get(0);
+        sp.delete(p);
+        
+        SingleDemandes.forEach(allDemandes::remove);
+        listProducts();
+	}
+	
+	@FXML
+	private void SupprimerAccessoire()
+	{
+		listeAccessoires.setItems(dataA);
+
+        ObservableList<Accessoire> allDemandes,SingleDemandes ;
+        allDemandes=listeAccessoires.getItems();
+        SingleDemandes=listeAccessoires.getSelectionModel().getSelectedItems();
+        Accessoire a = SingleDemandes.get(0);
+        sp.delete(a);
+        SingleDemandes.forEach(allDemandes::remove);
+        listProducts();
+	}
+	
+	
+	@FXML
+	 public void Changer_NomProduitVelo(TableColumn.CellEditEvent evt) {
+	     Velo selectedVelo = listeVelos.getSelectionModel().getSelectedItem();
+	     selectedVelo.setNomProduit(evt.getNewValue().toString());
+	     sp.update(selectedVelo);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_DescriptionVelo(TableColumn.CellEditEvent evt) {
+	     Velo selectedVelo = listeVelos.getSelectionModel().getSelectedItem();
+	     selectedVelo.setDescription(evt.getNewValue().toString());
+	     sp.update(selectedVelo);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_PrixVelo(TableColumn.CellEditEvent evt) {
+	     Velo selectedVelo = listeVelos.getSelectionModel().getSelectedItem();
+	     selectedVelo.setPrix(Float.parseFloat(evt.getNewValue().toString()));
+	     sp.update(selectedVelo);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_QuantiteVelo(TableColumn.CellEditEvent evt) {
+	     Velo selectedVelo = listeVelos.getSelectionModel().getSelectedItem();
+	     selectedVelo.setQuantite(Integer.parseInt(evt.getNewValue().toString()));
+	     sp.update(selectedVelo);
+	     listProducts();
+	 }
+	
+	@FXML
+	 public void Changer_NomProduitPiece(TableColumn.CellEditEvent evt) {
+	     Piece_Rechange selectedPiece = listePieces.getSelectionModel().getSelectedItem();
+	     selectedPiece.setNomProduit(evt.getNewValue().toString());
+	     sp.update(selectedPiece);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_DescriptionPiece(TableColumn.CellEditEvent evt) {
+		Piece_Rechange selectedPiece = listePieces.getSelectionModel().getSelectedItem();
+		selectedPiece.setDescription(evt.getNewValue().toString());
+	     sp.update(selectedPiece);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_PrixPiece(TableColumn.CellEditEvent evt) {
+	     Piece_Rechange selectedPiece = listePieces.getSelectionModel().getSelectedItem();
+	     selectedPiece.setPrix(Float.parseFloat(evt.getNewValue().toString()));
+	     sp.update(selectedPiece);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_QuantitePiece(TableColumn.CellEditEvent evt) {
+	     Piece_Rechange selectedPiece = listePieces.getSelectionModel().getSelectedItem();
+	     selectedPiece.setQuantite(Integer.parseInt(evt.getNewValue().toString()));
+	     sp.update(selectedPiece);
+	     listProducts();
+	 }
+	/**/
+	@FXML
+	 public void Changer_NomProduitAcc(TableColumn.CellEditEvent evt) {
+	     Accessoire selectedAccessoire = listeAccessoires.getSelectionModel().getSelectedItem();
+	     selectedAccessoire.setNomProduit(evt.getNewValue().toString());
+	     sp.update(selectedAccessoire);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_DescriptionAcc(TableColumn.CellEditEvent evt) {
+		Accessoire selectedAccessoire = listeAccessoires.getSelectionModel().getSelectedItem();
+		selectedAccessoire.setDescription(evt.getNewValue().toString());
+	     sp.update(selectedAccessoire);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_PrixAcc(TableColumn.CellEditEvent evt) {
+		Accessoire selectedAccessoire = listeAccessoires.getSelectionModel().getSelectedItem();
+		selectedAccessoire.setPrix(Float.parseFloat(evt.getNewValue().toString()));
+	     sp.update(selectedAccessoire);
+	     listProducts();
+	 }
+	@FXML
+	 public void Changer_QuantiteAcc(TableColumn.CellEditEvent evt) {
+		Accessoire selectedAccessoire = listeAccessoires.getSelectionModel().getSelectedItem();
+		selectedAccessoire.setQuantite(Integer.parseInt(evt.getNewValue().toString()));
+	     sp.update(selectedAccessoire);
+	     listProducts();
+	 }
+	
+	
+	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

@@ -34,11 +34,22 @@ public class Accessoire extends Produit {
 	private String type;
 
 	
-	public Accessoire(int id, String nomProduit, String description, float prix, String marque, String type) {
-		super(id, nomProduit, description, prix);
+	public Accessoire(int id, String nomProduit, String description, float prix,int quantite, String marque, String type) {
+		super(id, nomProduit, description, prix,quantite);
 		this.marque = marque;
 		this.type = type;
 	}
+	
+	
+	
+	
+	public Accessoire(String nomProduit, String description, float prix, int quantite, String marque, String type) {
+		super(nomProduit, description, prix, quantite);
+		this.marque = marque;
+		this.type = type;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Accessoire [marque=" + marque + ", type=" + type +" ,"+ super.toString() + "]";

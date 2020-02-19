@@ -36,12 +36,19 @@ public class Piece_Rechange extends Produit {
 	
 	
 	
-	public Piece_Rechange(int id, String nomProduit, String description, float prix, String marque, String type) {
-		super(id, nomProduit, description, prix);
+	public Piece_Rechange(int id, String nomProduit, String description, float prix,int quantite, String marque, String type) {
+		super(id, nomProduit, description, prix,quantite);
 		this.marque = marque;
 		this.type = type;
 	}
 	
+
+	public Piece_Rechange(String nomProduit, String description, float prix, int quantite, String marque, String type) {
+		super(nomProduit, description, prix, quantite);
+		this.marque = marque;
+		this.type = type;
+	}
+
 	public Piece_Rechange(String nomProduit, String description, float prix, String marque, String type) {
 		super(nomProduit, description, prix);
 		this.marque = marque;

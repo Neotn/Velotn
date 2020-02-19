@@ -30,13 +30,14 @@ public class ServiceProduit implements IServiceProduit {
 	@Override
 	public void insertVelo(Velo v) {
 		
-		String Produit ="insert into produits(nomProd,description,prix) values(?,?,?)";
+		String Produit ="insert into produits(nomProd,description,prix,quantite) values(?,?,?,?)";
 		int id=0;
 		try {
 			pst=cnx.prepareStatement(Produit);
 			pst.setString(1, v.getNomProduit());
 			pst.setString(2, v.getDescription());
 			pst.setFloat(3, v.getPrix());
+			pst.setInt(4, v.getQuantite());
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE,null,e);
@@ -73,13 +74,14 @@ public class ServiceProduit implements IServiceProduit {
 
 	@Override
 	public void insetPieceR(Piece_Rechange p) {
-		String Produit ="insert into produits(nomProd,description,prix) values(?,?,?)";
+		String Produit ="insert into produits(nomProd,description,prix,quantite) values(?,?,?,?)";
 		int id=0;
 		try {
 			pst=cnx.prepareStatement(Produit);
 			pst.setString(1, p.getNomProduit());
 			pst.setString(2, p.getDescription());
 			pst.setFloat(3, p.getPrix());
+			pst.setInt(4, p.getQuantite());
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE,null,e);
@@ -116,13 +118,14 @@ public class ServiceProduit implements IServiceProduit {
 	@Override
 	public void insertAccessoire(Accessoire a) {
 		
-		String Produit ="insert into produits(nomProd,description,prix) values(?,?,?)";
+		String Produit ="insert into produits(nomProd,description,prix,quantite) values(?,?,?,?)";
 		int id=0;
 		try {
 			pst=cnx.prepareStatement(Produit);
 			pst.setString(1, a.getNomProduit());
 			pst.setString(2, a.getDescription());
 			pst.setFloat(3, a.getPrix());
+			pst.setInt(4, a.getQuantite());
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			Logger.getLogger(ServiceProduit.class.getName()).log(Level.SEVERE,null,e);
@@ -177,7 +180,7 @@ public class ServiceProduit implements IServiceProduit {
 			rs=st.executeQuery(req);
 			while(rs.next())
 			{
-				list.add(new Velo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getString(6),rs.getString(7)));
+				list.add(new Velo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getString(7),rs.getString(8)));
 			}
 			
 		} catch (SQLException e) {
@@ -198,7 +201,7 @@ public class ServiceProduit implements IServiceProduit {
 			rs=st.executeQuery(req);
 			while(rs.next())
 			{
-				list.add(new Piece_Rechange(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getString(6),rs.getString(7)));
+				list.add(new Piece_Rechange(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getString(7),rs.getString(8)));
 			}
 			
 		} catch (SQLException e) {
@@ -220,7 +223,7 @@ public class ServiceProduit implements IServiceProduit {
 			rs=st.executeQuery(req);
 			while(rs.next())
 			{
-				list.add(new Accessoire(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getString(6),rs.getString(7)));
+				list.add(new Accessoire(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getString(7),rs.getString(8)));
 			}
 			
 		} catch (SQLException e) {
