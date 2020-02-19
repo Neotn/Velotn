@@ -33,15 +33,17 @@ public class LocationService implements Ilocation<Location>{
         cnx=DataSource.getInstance().getcnx();
     }
  @Override
-    public void insertLocation(Location l) { 
+    public int insertLocation(Location l) { 
         
-        String req=" insert into location(date_debut,date_fin,id_produit,id_user) values(?,?,?,?)";  
+        String req=" insert into location(date_debut,date_fin,prixtotal,id_produit,id_user) values(?,?,?,?,?)";  
+          String r2 = "select LAST_INSERT_ID() as id from location " ;   
+            int id = 0 ; 
         try {
         pst = cnx.prepareStatement(req) ;
         //pst.setInt(1,l.getUser().getId());
         pst.setString(1, l.getDate_debut()); 
         pst.setString(2, l.getDate_fin()); 
-        pst.setFloat(3,0); 
+        pst.setFloat(3,1); 
         pst.setInt(4,l.getVelo().getId()); 
         pst.setInt(5,l.getUser().getId());
         pst.executeUpdate() ; 
@@ -51,6 +53,25 @@ public class LocationService implements Ilocation<Location>{
         { 
                         Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
 
+        } 
+         finally{
+            try {  
+               st=cnx.createStatement() ;  
+               rs=st.executeQuery(r2) ; 
+               
+               while (rs.next()) 
+               { 
+                   id=rs.getInt(1);
+               }
+            
+        }catch (SQLException ex) { 
+            Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
+
+        } 
+            finally {
+                return id ; 
+            }
+            
         }
         
     } 
@@ -70,7 +91,7 @@ public class LocationService implements Ilocation<Location>{
         
              List<Location> list = new ArrayList<>() ; 
              Velo v ;
-             
+             User u ; 
         String req = "SELECT * from location l INNER JOIN velos v INNER JOIN produits p on v.id=p.id AND l.id_produit=v.id " ; 
         try {
             st=cnx.createStatement() ; 
@@ -79,8 +100,8 @@ public class LocationService implements Ilocation<Location>{
            while(rs.next()) 
            {
                v=new Velo(rs.getInt("id_produit"), rs.getString("nomProd"), rs.getString("description"), rs.getFloat("prix"), rs.getString("marque"), rs.getString("type"));
-               
-               list.add(new Location(rs.getInt("id"), rs.getString("date_debut"), rs.getString("date_fin"),rs.getFloat("prixtotal"),v)) ; 
+               u = new User(rs.getInt("id_user"));
+               list.add(new Location(u,rs.getInt("id"), rs.getString("date_debut"), rs.getString("date_fin"),rs.getFloat("prixtotal"),v)) ; 
                
            }
               
@@ -117,8 +138,8 @@ public class LocationService implements Ilocation<Location>{
         }    }
 
     @Override
-    public void Update(int id , String date_debut, String date_fin ,int id_v) {
-              String req=" UPDATE location SET date_debut='"+date_debut+"',date_fin='"+date_fin+"' WHERE id="+id+" and id_produit="+id_v;  
+    public void Update(int id , String date_debut, String date_fin ) {
+              String req=" UPDATE location SET date_debut='"+date_debut+"',date_fin='"+date_fin+"' WHERE id="+id;  
         try {  
                st=cnx.createStatement() ; 
                st.executeUpdate(req) ; 
@@ -190,7 +211,8 @@ public class LocationService implements Ilocation<Location>{
               prix= rs.getFloat("prix") ; 
         } catch (SQLException ex) {  
             Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }  
+        System.out.println(prix);
         return prix;
     }
 
@@ -212,8 +234,12 @@ public class LocationService implements Ilocation<Location>{
           
         } catch (SQLException ex) {  
             Logger.getLogger(LocationService.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return k*prix;
+        }  
+        System.out.println(k); 
+        System.out.println(prix); 
+        
+        return k*prix; 
+        
     }   
     
   
@@ -291,7 +317,7 @@ public class LocationService implements Ilocation<Location>{
                 while(rs.next()) 
                 { 
                       
-                 v=new Velo(rs.getInt("id"), rs.getString("nomProd"), rs.getString("description"), rs.getFloat("prix"), rs.getString("marque"), rs.getString("type"));
+                 v=new Velo(rs.getInt(1));
                 }
          return  v; 
      } 

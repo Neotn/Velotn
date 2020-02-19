@@ -55,7 +55,7 @@ Velo v1 = new Velo(1, "vtt", "sdhshd", 20, "mercedes", "tir");
         Location l2 = new Location(u1,"2020-07-10","2020-07-15",0,v2);  
         
        //ls.insertLocation(l1);   
-        //ls.UpdatePrix(12,ls.calculer(1),1);
+        //ls.UpdatePrix(6,ls.calculer(2),2);
        //ls.Update(12,"2020-03-10","2020-03-20",1);  
          //ls.UpdatePrix(12,ls.calculer(1),1); 
     // ls.insertLocation(l2); 

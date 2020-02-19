@@ -12,10 +12,10 @@ import java.util.List;
  * @author khalil
  */
 public interface Ilocation<T> { 
-    void insertLocation(T t) ;  
+    int insertLocation(T t) ;  
         List<T> displaAll() ;  
         void DeleteUserLocation(int id) ; 
-    void Update(int id , String date_debut, String date_fin , int id_v);  
+    void Update(int id , String date_debut, String date_fin );  
     List<T> rechercherParid(int id ) ; 
     float  calculer(int id ) ;  
       void DeleteProduitLocation(int id) ; 

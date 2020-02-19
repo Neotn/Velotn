@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import entity.Produit;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import service.PromotionService; 
 import entity.Promotion ;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleFloatProperty;
@@ -36,7 +38,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
+import javafx.util.converter.NumberStringConverter; 
+import java.text.* ; 
+import java.awt.print.* ; 
+import javafx.print.PrinterJob;
 /**
  * FXML Controller class
  *
@@ -75,6 +80,7 @@ public class PromotionController implements Initializable {
     private ComboBox<Integer> combo; 
      private final ObservableList<Integer> dataid = FXCollections.observableArrayList(ps.get_id_product()); 
     
+ 
    
    
     /**
@@ -82,9 +88,11 @@ public class PromotionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        combo.setItems(dataid);
+        combo.setItems(dataid); 
+        
                  Aff() ; 
-        RechercheAV();
+        RechercheAV(); 
+        
     }    
 
  
@@ -149,39 +157,35 @@ public class PromotionController implements Initializable {
 
 
  public void RechercheAV(){
-                // Wrap the ObservableList in a FilteredList (initially display all data).
+         
         FilteredList<Promotion> filteredData = new FilteredList<>(data, b -> true);
 		
-		// 2. Set the filter Predicate whenever the filter changes.
 		recherche.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(tab_demande -> {
-				// If filter text is empty, display all persons.
+			filteredData.setPredicate(tab_promotion -> {
+				
 								
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
 				
-				// Compare first name and last name of every person with filter text.
+		
 				String lowerCaseFilter = newValue.toLowerCase();
 				
-				if (tab_demande.getType().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
-					return true; // Filter matches first name.				 Filter matches last name.
+				if (tab_promotion.getType().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true;
 				}
-				else if (String.valueOf(tab_demande.getId()).indexOf(lowerCaseFilter)!=-1)
+				else if (String.valueOf(tab_promotion.getId()).indexOf(lowerCaseFilter)!=-1)
 				     return true;
 				     else  
-				    	 return false; // Does not match.
+				    	 return false; 
 			});
 		});
 		
-		// 3. Wrap the FilteredList in a SortedList. 
 		SortedList<Promotion> sortedData = new SortedList<>(filteredData);
 		
-		// 4. Bind the SortedList comparator to the TableView comparator.
-		// 	  Otherwise, sorting the TableView would have no effect.
 		sortedData.comparatorProperty().bind(tablePromotion.comparatorProperty());
 		
-		// 5. Add sorted (and filtered) data to the table.
+		
 		tablePromotion.setItems(sortedData);
    
  } 
@@ -192,7 +196,20 @@ public class PromotionController implements Initializable {
      tab_Promotionelected.setType(bb.getNewValue().toString());
         ps.Update(tab_Promotionelected.getId(),tab_Promotionelected.getType(),tab_Promotionelected.getTaux());
     }
- 
+
+//    @FXML
+//   private void printa(ActionEvent event) {  
+//       PrinterJob job;
+//        job = PrinterJob.createPrinterJob();
+// if(job != null){
+//   job.showPrintDialog(btprint.getScene().getWindow());  
+//   
+//   job.printPage(tablePromotion);
+//   job.endJob();
+// }
+//    }
+
+  
  
     
 }

@@ -32,7 +32,12 @@ public class Velo extends Produit {
 		super(nomProduit, description, prix);
 		this.setMarque(marque);
 		this.setType(type);
-	}
+	} 
+        public Velo (int id)  
+        {  
+                       super(id);
+
+        }
 	public String getMarque() {
 		return marque;
 	}
