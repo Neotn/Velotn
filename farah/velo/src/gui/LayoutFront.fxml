@@ -24,7 +24,7 @@
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <ImageView fitHeight="62.0" fitWidth="90.0" layoutX="-11.0" layoutY="3.0">
+                              <ImageView fitHeight="62.0" fitWidth="80.0" layoutX="-2.0" layoutY="6.0">
                                  <image>
                                     <Image url="@../Images/velo2.png" />
                                  </image>
@@ -102,6 +102,18 @@
                                  <image>
                                     <Image url="@../Images/iconfinder_10.check-correct_4201270.png" />
                                  </image></ImageView>
+                           </children>
+                        </Pane>
+                        <Pane onMouseClicked="#Logout" prefHeight="62.0" prefWidth="80.0" styleClass="menu" stylesheets="@../styles/layoutfront.css">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <children>
+                              <ImageView fitHeight="48.0" fitWidth="63.0" layoutX="10.0" layoutY="10.0">
+                                 <image>
+                                    <Image url="@../Images/logout.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                      </children>

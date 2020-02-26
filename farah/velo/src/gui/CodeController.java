@@ -23,11 +23,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.AddressException;
-
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * FXML Controller class
@@ -50,13 +57,19 @@ public class CodeController implements Initializable {
     Stage stage= new Stage();
     @FXML
     private Label remarque;
-       
+        public static final String ACCOUNT_SID = "AC873d2cad40a075f11e135bad0f9792b4";
+    public static final String AUTH_TOKEN = "c4c06eda1277ed994504be6047b43459";
+    @FXML
+    private ImageView imagecode;
+ 
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Image im = new Image("/Images/imagecode.png");
+        imagecode.setImage(im);
     }  
     
  public void setEmail(String email) {
@@ -77,20 +90,19 @@ public class CodeController implements Initializable {
         {
             
           Connection conn = Connexion.getinstance().getCnx();
-          String req= "Select username,password from fos_user where email=? ";
+          String req= "Select username,claire from fos_user where email=? ";
           PreparedStatement prs= conn.prepareStatement(req);
           prs.setString(1, this.email);
           rs= prs.executeQuery();
           while (rs.next()){
                  username= rs.getString("username");
-                 pass=rs.getString("password");
+                 pass=rs.getString("claire");
           }
 
-          mesg="votre nom d'utilisateur: "+username+"\n"+"votre mode de pass: "+pass; ;
+          mesg=" votre nom d'utilisateur: " + username + "\n" + "votre mode de pass: " +pass; ;
           
-          
-       String from ="world.friendship2019@gmail.com";
-       String pass="21626747";
+       String from ="velotn.velotn@gmail.com";
+       String pass="93751038O";
        String [] to={this.email};
        String host="mail.javatpoint.com";
        String sub="Password Recovery";
@@ -102,8 +114,21 @@ public class CodeController implements Initializable {
                     "javax.net.ssl.SSLSocketFactory");    
           props.put("mail.smtp.auth", "true");    
           props.put("mail.smtp.port", "465");    
-        
-          
+          //get Session   
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        protected PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(from,pass);
+    }
+}); 
+          //compose message                
+           MimeMessage message = new MimeMessage(session);    
+           message.addRecipient(Message.RecipientType.TO,new InternetAddress(this.email));    
+           message.setSubject(sub);    
+           message.setText(mesg);    
+           //send message  
+           Transport.send(message);    
+           System.out.println("message sent successfully");  
+       
  
         Node node =(Node)event.getSource();
             stage = (Stage)node.getScene().getWindow();

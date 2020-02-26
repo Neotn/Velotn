@@ -186,7 +186,7 @@ public class FrontGroupeController implements Initializable {
                 pane2.getChildren().addAll(hb);
 
                 String A = p3.getImage();
-                A = "C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images\\" + A;
+                A = "C:\\wamp64\\www\\velo\\src\\Images\\" + A;
                 File F1 = new File(A);
                 Image image2 = new Image(F1.toURI().toString());
 
@@ -246,7 +246,7 @@ public class FrontGroupeController implements Initializable {
                 pane2.getChildren().addAll(hb);
 
                 String A = p3.getImage();
-                A = "C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images\\" + A;
+                A = "C:\\wamp64\\www\\velo\\src\\Images\\" + A;
                 File F1 = new File(A);
                 Image image2 = new Image(F1.toURI().toString());
 
@@ -304,7 +304,7 @@ public class FrontGroupeController implements Initializable {
                 pane2.getChildren().addAll(hb);
 
                 String A = p3.getImage();
-                A = "C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images\\" + A;
+                A = "C:\\wamp64\\www\\velo\\src\\Images\\" + A;
                 File F1 = new File(A);
                 Image image2 = new Image(F1.toURI().toString());
 

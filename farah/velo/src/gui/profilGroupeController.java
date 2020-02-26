@@ -139,6 +139,8 @@ public class profilGroupeController implements Initializable {
     private Button signaler;
     @FXML
     private MenuButton action;
+    @FXML
+    private Label lieu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -146,32 +148,33 @@ public class profilGroupeController implements Initializable {
 
         System.out.println("a3333333333" + EvenementCourant.getGroupe_courant());
         nomg.setText(EvenementCourant.getNom());
+        lieu.setText(EvenementCourant.getLieu());
         date2.setText(String.valueOf(EvenementCourant.getDate_de_creation()));
         p_desc.setText(EvenementCourant.getDescription());
         String A = EvenementCourant.getImage();
-        A = "C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images\\" + A;
+        A = "C:\\wamp64\\www\\velo\\src\\Images\\" + A;
         File F1 = new File(A);
         Image image2 = new Image(F1.toURI().toString());
         p_image.setImage(image2);
-
-        FontAwesomeIconView fb = new FontAwesomeIconView(FontAwesomeIcon.FACEBOOK_SQUARE);
-        fb.setFill(javafx.scene.paint.Color.BLUE);
-        fb.setSize("50");
-
-        fb.setCursor(Cursor.HAND);
-
-        fb.setLayoutX(150);
-        fb.setLayoutY(240);
-        fb.setOnMouseClicked((MouseEvent event) -> {
-            System.out.println("te5demmm ");
-
-            Groups EvenementCourantt = new Groups();
-
-            EvenementCourantt = service.getGroupeById(EvenementCourantt.getGroupe_courant());
-
-            System.out.println("FB succes!");
-
-        });
+//
+//        FontAwesomeIconView fb = new FontAwesomeIconView(FontAwesomeIcon.FACEBOOK_SQUARE);
+//        fb.setFill(javafx.scene.paint.Color.BLUE);
+//        fb.setSize("50");
+//
+//        fb.setCursor(Cursor.HAND);
+//
+//        fb.setLayoutX(150);
+//        fb.setLayoutY(240);
+//        fb.setOnMouseClicked((MouseEvent event) -> {
+//            System.out.println("te5demmm ");
+//
+//            Groups EvenementCourantt = new Groups();
+//
+//            EvenementCourantt = service.getGroupeById(EvenementCourantt.getGroupe_courant());
+//
+//            System.out.println("FB succes!");
+//
+//        });
 
         List<PublicationGroup> pulications = ser.getPublicationByGroup(EvenementCourant);
         vboxStatus.getChildren().clear();
@@ -220,7 +223,7 @@ public class profilGroupeController implements Initializable {
         aff.setOnMouseClicked(e -> {
 
             Alert dialog = new Alert(AlertType.INFORMATION);
-            dialog.setTitle("Membres de  Groupe");
+            dialog.setTitle("Membres de Groupe");
             dialog.setResizable(true);
             dialog.getDialogPane().setPrefSize(700, 320);
 
@@ -230,12 +233,12 @@ public class profilGroupeController implements Initializable {
             dialog.getDialogPane().setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(2), new Insets(2))));
             dialog.getDialogPane().setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-            GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(20, 150, 10, 10));
+          GridPane grid = new GridPane();
+          grid.setHgap(10);
+           grid.setVgap(10);
+           grid.setPadding(new Insets(20, 150, 10, 10));
             VBox l = new VBox();
-            l.setPrefWidth(400);
+         l.setPrefWidth(400);
             l.setPrefHeight(500);
             l.getChildren().add(userItem1(sd.getUserById(service.getGroupeById(getGroupe_courant()).getIdUser())));
             List<GroupsMembers> y = p.getMemberByIdGroup(getGroupe_courant());
@@ -251,6 +254,7 @@ public class profilGroupeController implements Initializable {
             dialog.showAndWait();
 
         });
+
         demande.setOnMouseClicked(e -> {
             Alert dialog = new Alert(AlertType.INFORMATION);
             dialog.setTitle("Demande d'inscription de  Groupe");
@@ -449,7 +453,7 @@ public class profilGroupeController implements Initializable {
         participer.setStyle("-fx-background-color: #494c62; ");
         participer.setTextFill(Color.web("#e8f8ff"));
         if (p.checkAcceptation(EvenementCourant, sd.getUserById(getUserId()))) {
-            participer.setText("en attente");
+            participer.setText("En attente");
 
             participer.setDisable(true);
             annuler.setVisible(false);
@@ -463,7 +467,7 @@ public class profilGroupeController implements Initializable {
         }
         participer.setOnMouseClicked(s
                 -> {
-            participer.setText("en attente");
+            participer.setText("En attente");
             annuler.setVisible(false);
 
             p.increment(service.getGroupeById(getGroupe_courant()), sd.getUserById(getUserId()));
@@ -880,7 +884,7 @@ public class profilGroupeController implements Initializable {
             textBut.setPrefHeight(40);
             textBut.setText(a.getDescription());
 
-            JFXButton upload = new JFXButton("Telecharger votre image");
+            JFXButton upload = new JFXButton("Télécharger votre image");
             ImageView image_p = new ImageView();
             upload.setStyle("-fx-background-color: #724848; ");
             upload.setTextFill(Color.web("#e8f8ff"));
@@ -944,7 +948,7 @@ public class profilGroupeController implements Initializable {
                     Logger.getLogger(profilGroupeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 Notifications n = Notifications.create().title("Notification")
-                        .text("Le groupe est modifier avec succées")
+                        .text("Le groupe est modifié avec succées")
                         .graphic(null)
                         .position(Pos.BASELINE_LEFT)
                         .onAction((ActionEvent event1) -> {
@@ -967,6 +971,11 @@ public class profilGroupeController implements Initializable {
 
         modif.getChildren().add(modifier1);
         supp.getChildren().add(supprimer1);
+    }
+
+    @FXML
+    private void retour(MouseEvent event) {
+        loadView("/gui/FrontGroupe.fxml");
     }
 
 }

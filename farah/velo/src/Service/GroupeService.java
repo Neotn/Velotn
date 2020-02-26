@@ -34,7 +34,7 @@ public class GroupeService {
     }
 
     public void ajouterGroupe(Groups p1) {
-        String req = "INSERT INTO `groups`(`id`, `nom`,`nbrMembre`, `description`,  `date_de_creation`,  image , `nbr_signal`,`IdUser`) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO `groups`(`id`, `nom`,`nbrMembre`, `description`,  `date_de_creation`,  image , `nbr_signal`,`IdUser`,lieux) VALUES (?,?,?,?,?,?,?,?,?)";
         Calendar c1 = Calendar.getInstance();
         Timestamp ts = new Timestamp(c1.getTimeInMillis());
         try {
@@ -49,6 +49,7 @@ public class GroupeService {
             ps.setString(6, p1.getImage());
             ps.setInt(7, 0);
             ps.setInt(8, getUserId());
+            ps.setString(9, p1.getLieu());
 
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -106,7 +107,7 @@ public class GroupeService {
                 g.setImage(rest.getString("image"));
                 g.setIdUser(rest.getInt("IdUser"));
                 g.setDescription(rest.getString("description"));
-
+                g.setLieu(rest.getString("lieux"));
             }
 
         } catch (SQLException ex) {

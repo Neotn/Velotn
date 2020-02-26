@@ -30,6 +30,15 @@ public class Groups {
     private String image;
     private int nbr_signal;
     private int IdUser;
+    private String lieu;
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    }
 
     public Groups(String nom, String Description, String image) {
         this.nom = nom;

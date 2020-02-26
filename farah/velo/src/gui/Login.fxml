@@ -12,7 +12,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="654.0" prefWidth="1009.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="654.0" prefWidth="1009.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
    <children>
       <MediaView fx:id="mv">
          <viewport>
@@ -27,12 +27,12 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="username" layoutX="93.0" layoutY="126.0" prefHeight="26.0" prefWidth="242.0" promptText="email/usernam" />
-            <Hyperlink fx:id="mail" layoutX="150.0" layoutY="324.0" onAction="#sendmail" text="Forgot Password?" textFill="WHITE" underline="true" />
-            <JFXButton fx:id="signup" buttonType="RAISED" layoutX="178.0" layoutY="293.0" onAction="#SignUp" ripplerFill="#f8aeae" style="-fx-max-height: Bold;" text="Sign up" textFill="#fffcfc" />
+            <TextField fx:id="username" layoutX="93.0" layoutY="126.0" prefHeight="26.0" prefWidth="242.0" promptText="Email/Usernam" />
+            <Hyperlink fx:id="mail" layoutX="161.0" layoutY="326.0" onAction="#sendmail" text="Forget Password?" textFill="WHITE" underline="true" />
+            <JFXButton fx:id="signup" buttonType="RAISED" layoutX="184.0" layoutY="293.0" onAction="#SignUp" ripplerFill="#f8aeae" style="-fx-max-height: Bold;" text="Sign up" textFill="#fffcfc" />
             <Label fx:id="msg" layoutX="86.0" layoutY="387.0" textFill="#ff0303" />
             <JFXButton fx:id="button" buttonType="RAISED" layoutX="131.0" layoutY="261.0" onAction="#LoginAction" prefHeight="32.0" prefWidth="164.0" text="Login" textFill="#fffdfd" />
-            <JFXCheckBox fx:id="remember" layoutX="88.0" layoutY="220.0" prefHeight="18.0" prefWidth="226.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" />
+            <JFXCheckBox fx:id="remember" layoutX="91.0" layoutY="220.0" prefHeight="18.0" prefWidth="226.0" text="Remember me" textFill="WHITE" unCheckedColor="WHITE" />
          </children>
       </AnchorPane>
       <ButtonBar layoutX="102.0" layoutY="181.0" prefHeight="40.0" prefWidth="200.0" />

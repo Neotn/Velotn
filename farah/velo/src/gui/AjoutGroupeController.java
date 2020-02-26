@@ -75,7 +75,9 @@ GroupeService service = new GroupeService();
     private Path pathfrom;
     private Path pathto;
     private File Current_file;
-        private FileInputStream fis;
+    private FileInputStream fis;
+    @FXML
+    private JFXTextField lieu;
 
 
     /**
@@ -119,6 +121,10 @@ GroupeService service = new GroupeService();
             Alert a = new Alert(null, "Vérifier votre description !!", ButtonType.CLOSE);
             a.showAndWait();
             System.out.println("Incorrect");
+        } else if (!checkText(lieu.getText())) {
+            Alert a = new Alert(null, "Vérifier votre lieu !!", ButtonType.CLOSE);
+            a.showAndWait();
+            System.out.println("Incorrect");
         } 
          else {
             Groups events = new Groups();
@@ -130,12 +136,13 @@ GroupeService service = new GroupeService();
             events.setIdUser(Controller.getUserId());
             events.setNbrMembre(1);
             events.setNbr_signal(0);
+            events.setLieu(lieu.getText());
            
             
             events.setImage(file_image);
             pathfrom = FileSystems.getDefault().getPath(Current_file.getPath());
-            pathto = FileSystems.getDefault().getPath("C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images\\" + Current_file.getName());
-            Path targetDir = FileSystems.getDefault().getPath("C:\\Users\\Farah GABSI\\Documents\\NetBeansProjects\\velo\\src\\Images");
+            pathto = FileSystems.getDefault().getPath("C:\\wamp64\\www\\velo\\src\\Images\\" + Current_file.getName());
+            Path targetDir = FileSystems.getDefault().getPath("C:\\wamp64\\www\\velo\\src\\Images\\");
             Files.copy(pathfrom, pathto, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("ayyya 3ad"+Controller.getUserId());
 

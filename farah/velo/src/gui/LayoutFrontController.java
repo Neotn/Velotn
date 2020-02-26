@@ -15,9 +15,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -39,6 +41,8 @@ public class LayoutFrontController implements Initializable {
     private ImageView interaction;
     @FXML
     private AnchorPane holderPane;
+    Stage stage = new Stage();
+    Scene scene;
 
     /**
      * Initializes the controller class.
@@ -47,13 +51,14 @@ public class LayoutFrontController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Controller.holderPane = holderPane;
         loadView("/gui/FrontGroupe.fxml");
-    }    
+    }
 
     @FXML
     private void home() throws IOException {
-        loadView("../GUI/Journal.fxml");
-                  
+        loadView("../gui/Journal.fxml");
+
     }
+
     private void setNode(Node node) {
         holderPane.getChildren().clear();
         holderPane.getChildren().add((Node) node);
@@ -65,10 +70,9 @@ public class LayoutFrontController implements Initializable {
         ft.setAutoReverse(false);
         ft.play();
     }
-    
-    private Object loadView(String path)
-    {
-        FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource((path)));
+
+    private Object loadView(String path) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource((path)));
         AnchorPane parentContent = null;
         try {
             parentContent = fxmlLoader.load();
@@ -103,5 +107,16 @@ public class LayoutFrontController implements Initializable {
     @FXML
     private void forumAction(MouseEvent event) {
         loadView("../GUI/ListBonPlan.fxml");
+    }
+
+    @FXML
+    private void Logout(MouseEvent event) throws IOException {
+        Controller.setUserId(0);
+        Node node = (Node) event.getSource();
+        stage = (Stage) node.getScene().getWindow();
+        stage.close();
+        scene = new Scene(FXMLLoader.load(getClass().getResource("/gui/Login.fxml")));
+        stage.setScene(scene);
+        stage.show();
     }
 }

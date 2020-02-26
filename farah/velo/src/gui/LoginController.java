@@ -6,7 +6,6 @@
 package gui;
 
 
-import Entities.User;
 import Service.LoginService;
 import Service.UserService;
 import Utils.Connexion;

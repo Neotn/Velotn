@@ -93,9 +93,9 @@ public class ForgotPassController implements Initializable {
     @FXML
     private void SendMail(ActionEvent event) throws AddressException, MessagingException, SQLException, IOException {
         if (mailid.getText().isEmpty()) {
-            label.setText("remarque : email vide");
+            label.setText("Remarque : email vide");
         } else if (!mailid.getText().matches("[a-zA-Z0-9\\.]+@[a-zA-Z0-9\\-\\_\\.]+\\.[a-zA-Z0-9]{2}")) {
-            label.setText("remarque : email non valide");
+            label.setText("Remarque : email non valide");
         } else {
             Connection conn = Connexion.getinstance().getCnx();
             String req = "Select username,password from fos_user where email=? ";
@@ -110,8 +110,10 @@ public class ForgotPassController implements Initializable {
             z = mailid.getText();
             mesg = "votre code est : " + y;
 
-            String from = "world.friendship2019@gmail.com";
-            String pass = "21626747";
+               
+       String from ="velotn.velotn@gmail.com";
+       String pass="93751038O";
+           
             String[] to = {mailid.getText()};
             String host = "mail.javatpoint.com";
             String sub = "Password Recovery";
@@ -136,7 +138,7 @@ public class ForgotPassController implements Initializable {
             message.setText(mesg);
             //send message  
             Transport.send(message);
-            System.out.println("message sent successfully");
+            System.out.println("Message sent successfully");
             mediaplayer.stop();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Code.fxml"));

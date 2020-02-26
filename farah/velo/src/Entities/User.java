@@ -28,7 +28,7 @@ public class User {
  private String image;
  private String pays;
  private String region;
- private int code_postal;
+ private Integer code_postal;
  private String rue;
 
 
@@ -149,11 +149,11 @@ public class User {
         this.region = region;
     }
 
-    public int getCode_postal() {
+    public Integer getCode_postal() {
         return code_postal;
     }
 
-    public void setCode_postal(int code_postal) {
+    public void setCode_postal(Integer code_postal) {
         this.code_postal = code_postal;
     }
 

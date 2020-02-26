@@ -10,9 +10,9 @@
 
 <HBox layoutX="79.0" prefHeight="37.0" prefWidth="1300.0" style="-fx-background-color: #494c62;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuBarController">
    <children>
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-y: 20; -fx-translate-x: 20;" text="Velo.tn" wrappingWidth="555.6123046875">
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-y: 20; -fx-translate-x: 20;" text="Vélo.tn" wrappingWidth="555.6123046875">
          <font>
-            <Font name="Ebrima Bold" size="22.0" />
+            <Font name="Ebrima Bold" size="30.0" />
          </font>
       </Text>
      
